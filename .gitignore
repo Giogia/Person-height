@@ -41,7 +41,9 @@ tmtagsHistory
 *.sublime-workspace
 .bundle
 
-# Videos
+# Videos and Photos
 ######################
 *.mp4
 *.avi
+*.png
+*.jpg
