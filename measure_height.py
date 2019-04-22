@@ -1,11 +1,10 @@
 from draw_lines import *
-from utils import *
 from vanishing_line import *
 
 PATH = 'img1.jpg'
 
 # Read image
-image = read_image(PATH)
+image = cv2.imread(PATH)
 
 # Get lines for plane vanishing line
 horizontal_vanishing_points = []
@@ -16,7 +15,7 @@ for i in range (2):
     horizontal_vanishing_points.append(horizontal_vanishing_point)
     draw_vanishing_point(image, horizontal_vanishing_point)
 
-draw_vanishing_line(image,horizontal_vanishing_points)
+draw_vanishing_line(image, horizontal_vanishing_points)
 
 # Get lines for vertical vanishing point
 vertical_lines = get_lines(image, 2)
