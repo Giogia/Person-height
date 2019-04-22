@@ -1,4 +1,4 @@
-import cv2
+
 
 # Calculate line slope given two points
 def slope(point_1, point_2):
