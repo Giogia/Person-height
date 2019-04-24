@@ -1,6 +1,7 @@
-import numpy as np
-import cv2
 import time
+
+import cv2
+import numpy as np
 
 LINE = False
 MESSAGE = False
@@ -8,6 +9,7 @@ N = 0
 COLOUR_RED = (100, 100, 255)
 COLOUR_GREEN = (100, 255, 100)
 COLOUR_BLUE = (255, 100, 100)
+COLOUR_WHITE = (255, 255, 255)
 THICKNESS = 1
 
 
@@ -18,7 +20,7 @@ def get_lines(im, number_of_lines, message):
     # Set up data to send to mouse handler
     data = {'image': im.copy(), 'message': message, 'number_of_lines': number_of_lines, 'lines': []}
 
-    THICKNESS = max(THICKNESS, int(0.005 * min(data['image'].shape[0], data['image'].shape[1])))
+    THICKNESS = max(THICKNESS, int(0.002 * min(data['image'].shape[0], data['image'].shape[1])))
 
     # Set the callback function for any mouse event
     cv2.namedWindow("Image", cv2.WINDOW_GUI_NORMAL)
@@ -70,7 +72,7 @@ def mouse_handler(event, x, y, flags, data):
         # Draw the first Point
         LINE = True
         data['lines'].append([(x, y)])  # add the point
-        cv2.circle(data['image'], (x, y), 2, COLOUR_RED, 3 * THICKNESS, 16)
+        cv2.circle(data['image'], (x, y), 2, COLOUR_RED, 2 * THICKNESS, 16)
         cv2.imshow("Image", data['image'])
 
 
@@ -82,10 +84,10 @@ def write_message(image, message):
     cv2.imshow("Image", image)
 
 
-def draw_point(image, point):
+def draw_point(image, point, colour=COLOUR_GREEN):
 
     cv2.namedWindow("Image", cv2.WINDOW_GUI_NORMAL)
-    cv2.circle(image, tuple(point), 2, COLOUR_GREEN, 30, 16)
+    cv2.circle(image, tuple(point), 2, colour, 3*THICKNESS, 16)
     cv2.imshow("Image", image)
 
 
