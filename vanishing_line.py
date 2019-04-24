@@ -2,7 +2,7 @@
 
 # Calculate line slope given two points
 def slope(point_1, point_2):
-    return (point_2[1] - point_1[1]) / (point_2[0] - point_1[0])
+    return (point_2[1] - point_1[1]) / (point_2[0] - point_1[0] + 0.000001)
 
 
 # Calculate y intersection of a line
@@ -15,7 +15,6 @@ def line_intersect(m1, q1, m2, q2):
 
     # Check if the lines are parallel
     if m1 == m2:
-        print("These lines are parallel!!!")
         return None
 
     x = (q2 - q1) / (m1 - m2)
@@ -35,12 +34,6 @@ def intersection_point(line_1, line_2):
 
     return line_intersect(m_1, y_int_1, m_2, y_int_2)
 
-
-# print the equation of a line
-def find_equation(point_1, point_2):
-    m = slope(point_1, point_2)
-    c = y_intersection(point_1, m)
-    return 'y = ' + str(m) + '*x + ' + str(c)
 
 
 
