@@ -2,11 +2,11 @@ from draw_lines import *
 from vanishing_line import *
 from camera_calibration import *
 
-PATH = 'image.png'
-OBJECT_HEIGHT = 75
+PATH = 'test.jpg'
+OBJECT_HEIGHT = 80
 
 # Read image
-image = cv2.imread(PATH, 17)
+image = cv2.imread(PATH, 33)
 image = remove_radial_distortion(image)
 
 # Get Base object and Person
@@ -68,6 +68,7 @@ write_message(image, str(person_height))
 
 cv2.namedWindow("Image", cv2.WINDOW_GUI_NORMAL)
 cv2.imshow("Image", image)
+cv2.imwrite('result.jpg', image)
 
 cv2.waitKey()
 cv2.destroyAllWindows()

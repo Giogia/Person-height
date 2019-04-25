@@ -16,18 +16,17 @@ def remove_radial_distortion(image):
     object_points = []  # 3d point in real world space
     image_points = []  # 2d points in image plane.
 
-    calibration_images = glob.glob('calibration/GH5/*.JPG')
+    calibration_images = glob.glob('calibration/gh5/*.jpg')
 
     for calibration_image in calibration_images:
 
-        img = cv2.imread(calibration_image, 17)
+        img = cv2.imread(calibration_image, 33)
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
         # Find the chess board corners
         ret, corners = cv2.findChessboardCorners(gray, (7, 6), None)
 
         # If found, add object points, image points (after refining them)
-        print(ret)
         if ret:
             object_points.append(object_p)
 
@@ -51,11 +50,6 @@ def remove_radial_distortion(image):
     new_camera_matrix, roi = cv2.getOptimalNewCameraMatrix(mtx, dist, (width, height), 1, (width, height))
 
     undistorted_image = cv2.undistort(image, mtx, dist, None, new_camera_matrix)
-
-    # crop and save the image
-    #x, y, width, height = roi
-    #undistorted_image = undistorted_image[y:y + height, x:x + width]
-    #cv2.imwrite('calibration_result.jpg', undistorted_image)
 
     return undistorted_image
 
