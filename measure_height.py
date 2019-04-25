@@ -3,10 +3,10 @@ from vanishing_line import *
 from camera_calibration import *
 
 PATH = 'image.png'
-OBJECT_HEIGHT = 1
+OBJECT_HEIGHT = 75
 
 # Read image
-image = cv2.imread(PATH)
+image = cv2.imread(PATH, 17)
 image = remove_radial_distortion(image)
 
 # Get Base object and Person

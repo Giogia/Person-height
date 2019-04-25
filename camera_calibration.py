@@ -16,17 +16,18 @@ def remove_radial_distortion(image):
     object_points = []  # 3d point in real world space
     image_points = []  # 2d points in image plane.
 
-    calibration_images = glob.glob('calibration/*.jpg')
+    calibration_images = glob.glob('calibration/GH5/*.JPG')
 
     for calibration_image in calibration_images:
 
-        img = cv2.imread(calibration_image)
+        img = cv2.imread(calibration_image, 17)
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
         # Find the chess board corners
         ret, corners = cv2.findChessboardCorners(gray, (7, 6), None)
 
         # If found, add object points, image points (after refining them)
+        print(ret)
         if ret:
             object_points.append(object_p)
 
@@ -34,13 +35,16 @@ def remove_radial_distortion(image):
             image_points.append(corners2)
 
             # Draw and display the corners
-            # img = cv2.drawChessboardCorners(img, (7, 6), corners2, ret)
-            # cv2.imshow('img', img)
-            # cv2.waitKey(500)
+
+            img = cv2.drawChessboardCorners(img, (7, 6), corners2, ret)
+            cv2.namedWindow('img', cv2.WINDOW_NORMAL)
+            cv2.imshow('img', img)
+            cv2.waitKey(500)
 
     cv2.destroyAllWindows()
 
-    ret, mtx, dist, r_vectors, t_vectors = cv2.calibrateCamera(object_points, image_points, gray.shape[::-1], None, None)
+    ret, mtx, dist, r_vectors, t_vectors = cv2.calibrateCamera(object_points, image_points,
+                                                               gray.shape[::-1], None, None)
 
     height, width = image.shape[:2]
 
@@ -48,9 +52,10 @@ def remove_radial_distortion(image):
 
     undistorted_image = cv2.undistort(image, mtx, dist, None, new_camera_matrix)
 
-    # crop the image
-    # x, y, width, height = roi
-    # undistorted_image = undistorted_image[y:y + height, x:x + width]
-    # cv2.imwrite('calibration_result.jpg', undistorted_image)
+    # crop and save the image
+    #x, y, width, height = roi
+    #undistorted_image = undistorted_image[y:y + height, x:x + width]
+    #cv2.imwrite('calibration_result.jpg', undistorted_image)
 
     return undistorted_image
+
