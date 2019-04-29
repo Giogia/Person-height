@@ -68,7 +68,10 @@ write_message(image, str(person_height))
 
 cv2.namedWindow("Image", cv2.WINDOW_GUI_NORMAL)
 cv2.imshow("Image", image)
-cv2.imwrite('result.jpg', image)
+
+NAME = 'result.jpg'
+cv2.imwrite(NAME, image)
+print("Image saved with name: " + NAME)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
