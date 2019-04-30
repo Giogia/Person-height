@@ -10,8 +10,8 @@ image = cv2.imread(PATH, 33)
 image = remove_radial_distortion(image)
 
 # Get Base object and Person
-base_object = get_lines(image, 1, "One Line for Base Object")
-draw_line(image, base_object, COLOUR_GREEN)
+reference_object = get_lines(image, 1, "One Line for Base Object")
+draw_line(image, reference_object, COLOUR_GREEN)
 
 person = get_lines(image, 1, "One Line for Person")
 draw_line(image, person, COLOUR_BLUE)
@@ -32,38 +32,38 @@ vanishing_line = np.asarray(vanishing_line, dtype=int)
 draw_line(image, vanishing_line, COLOUR_WHITE)
 
 # Line between object and person bottoms
-plane_line = np.array([base_object[0], person[0]], dtype=int)
-draw_line(image, plane_line, COLOUR_WHITE)
+base_line = np.array([reference_object[0], person[0]], dtype=int)
+draw_line(image, base_line, COLOUR_WHITE)
 
 # Intersection of plane line with vanishing line
-vanishing_line_intersection = intersection_point(plane_line, vanishing_line)
-draw_point(image, vanishing_line_intersection, COLOUR_GREEN)
+base_line_vanishing_point = intersection_point(base_line, vanishing_line)
+draw_point(image, base_line_vanishing_point, COLOUR_GREEN)
 
 # Project object on person from vanishing line
-object_projection = np.array([base_object[1], vanishing_line_intersection], dtype=int)
-object_height = intersection_point(person, object_projection)
+object_projection_line = np.array([reference_object[1], base_line_vanishing_point], dtype=int)
+object_projection = intersection_point(person, object_projection_line)
 
 # Line between object and person tops
-top_line = np.array([base_object[1], person[1]], dtype=int)
+top_line = np.array([reference_object[1], person[1]], dtype=int)
 draw_line(image, top_line, COLOUR_WHITE)
 
 # Person line parallel to object line
-parallel_person_top = np.subtract(person[0], np.subtract(base_object[0], base_object[1]))
-parallel_person = np.array([person[0], parallel_person_top])
-person_height_point = intersection_point(top_line, parallel_person)
-draw_point(image, person_height_point, COLOUR_BLUE)
-person_height_line = np.array([person_height_point, person[0]])
-draw_line(image, person_height_line, COLOUR_BLUE)
+parallel_object_top = np.subtract(person[0], np.subtract(reference_object[0], reference_object[1]))
+parallel_object = np.array([person[0], parallel_object_top])
+parallel_person_top = intersection_point(top_line, parallel_object)
+draw_point(image, parallel_person_top, COLOUR_BLUE)
+parallel_person = np.array([parallel_person_top, person[0]])
+draw_line(image, parallel_person, COLOUR_BLUE)
 
 # Object projection on parallel person line
-parallel_object_height = intersection_point(parallel_person, object_projection)
-draw_point(image, parallel_object_height, COLOUR_GREEN)
-parallel_object_line = np.array([parallel_object_height, person[0]])
-draw_line(image, parallel_object_line, COLOUR_GREEN)
+parallel_object_projection = intersection_point(parallel_person, object_projection_line)
+draw_point(image, parallel_object_projection, COLOUR_GREEN)
+object_height = np.array([parallel_object_projection, person[0]])
+draw_line(image, object_height, COLOUR_GREEN)
 
 # Compute ration between the two heights
-person_height = OBJECT_HEIGHT * np.linalg.norm(person[0] - person_height_point) \
-                / np.linalg.norm(person[0] - parallel_object_height)
+person_height = OBJECT_HEIGHT * np.linalg.norm(person[0] - parallel_person_top) \
+                / np.linalg.norm(person[0] - parallel_object_projection)
 write_message(image, str(person_height))
 
 cv2.namedWindow("Image", cv2.WINDOW_GUI_NORMAL)
