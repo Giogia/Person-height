@@ -27,7 +27,5 @@ Then select with the mouse:
 
 ### Results
 
-<div>
-<img src="test.jpg" width="500"/>
-<img src="result.jpg" alt="drawing" width="500"/>
-</div>
+:-------------------------:|:-------------------------:
+![](test.png)  |  ![](result.png)
