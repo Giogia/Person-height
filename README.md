@@ -27,6 +27,6 @@ Then select with the mouse:
 
 ###Results
 
-![](test.jpg =100x20)
-![](result.jpg =100x20)
+<img src="test.jpg" width="200"/>
+<img src="result.jpg" alt="drawing" width="200"/>
 
