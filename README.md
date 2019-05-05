@@ -27,4 +27,4 @@ Then select with the mouse:
 
 ### Results
 
-<img src="test.jpg" width="40%" /> |   <img src="result.jpg" width="40%" />
+<img src="test.jpg" width="49%" /> |   <img src="result.jpg" width="49%" />
