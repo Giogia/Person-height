@@ -27,4 +27,5 @@ Then select with the mouse:
 
 ### Results
 
-![](test.png)  |  ![](result.png)
+![](test.png)    
+![](result.png)
