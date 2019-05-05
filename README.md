@@ -3,7 +3,7 @@
 
 it calculates the relation in the tridimensional space between a person height and the one of a given object.
 
-###Prerequisites
+### Prerequisites
 ---
 
 * Python 3
@@ -11,7 +11,7 @@ it calculates the relation in the tridimensional space between a person height a
 * enough lines to compute the ground plane. 
  
 
-###Usage
+### Usage
 ---
 
 run the following command:
@@ -25,8 +25,8 @@ Then select with the mouse:
 * 2 lines containing the person and the object heights 
 * 4 background lines to compute the vanishing line
 
-###Results
+### Results
 
-<img src="test.jpg" width="200"/>
-<img src="result.jpg" alt="drawing" width="200"/>
+<img src="test.jpg" width="500"/>
+<img src="result.jpg" alt="drawing" width="500"/>
 
