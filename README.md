@@ -3,16 +3,17 @@
 
 it calculates the relation in the tridimensional space between a person height and the one of a given object.
 
-### Prerequisites
 ---
+
+### Prerequisites
 
 * Python 3
 * top and base points of the person and object displayed in the image 
 * enough lines to compute the ground plane. 
  
+---
 
 ### Usage
----
 
 run the following command:
 
@@ -24,6 +25,8 @@ Then select with the mouse:
 
 * 2 lines containing the person and the object heights 
 * 4 background lines to compute the vanishing line
+
+---
 
 ### Results
 
